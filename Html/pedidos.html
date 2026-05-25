@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pedidos y Reportes | NextVision</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/pedidos.css">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <img src="/assets/logo/logo.jpg" alt="NextVision Logo">
+      </div>
+     <div class="nav-links">
+          <a href="/Html/index.html">Inicio</a>
+          <a href="/Html/servicios.html">Servicios</a>
+          <a href="/Html/Sistema.html">Sistema</a>
+          <a href="/Html/Nosotros.html">Nosotros</a>
+          <a href="/Html/Contacto.html">Contacto</a>
+        </div> 
+    </nav>
+  </div>
+</header>
+
+<main class="pedidos-main">
+  <div class="container">
+
+    <div class="page-title">
+      <h1>
+        <i class="fas fa-chart-line"></i> 
+        Pedidos y Reportes
+      </h1>
+      <p>Seguimiento de pedidos y análisis de ventas | Gráficas interactivas</p>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <h3><i class="fas fa-shopping-cart"></i> Total Pedidos</h3>
+        <div class="kpi-number" id="totalPedidos">156</div>
+        <div class="kpi-trend"><i class="fas fa-arrow-up"></i> +12% vs mes anterior</div>
+        <div class="kpi-icon-bg"><i class="fas fa-chart-line"></i></div>
+      </div>
+      <div class="kpi-card">
+        <h3><i class="fas fa-check-circle"></i> Entregados</h3>
+        <div class="kpi-number" id="entregados">66</div>
+        <div class="kpi-percent">42% del total</div>
+        <div class="kpi-icon-bg"><i class="fas fa-truck"></i></div>
+      </div>
+      <div class="kpi-card">
+        <h3><i class="fas fa-spinner"></i> En Proceso</h3>
+        <div class="kpi-number" id="enProceso">44</div>
+        <div class="kpi-percent">28% del total</div>
+        <div class="kpi-icon-bg"><i class="fas fa-clock"></i></div>
+      </div>
+      <div class="kpi-card">
+        <h3><i class="fas fa-hourglass-half"></i> Pendientes</h3>
+        <div class="kpi-number" id="pendientes">46</div>
+        <div class="kpi-percent">30% del total</div>
+        <div class="kpi-icon-bg"><i class="fas fa-hourglass"></i></div>
+      </div>
+    </div>
+
+    <!-- TRES GRÁFICAS INTERACTIVAS -->
+    <div class="dashboard-grid-3">
+      
+      <!-- Gráfica 1: Ventas Mensuales (Bar) -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2><i class="fas fa-chart-bar"></i> Ventas Mensuales</h2>
+          <div class="trend-badge"><i class="fas fa-chart-line"></i> +15% vs año pasado</div>
+        </div>
+        <div class="chart-container">
+          <canvas id="monthlySalesChart"></canvas>
+        </div>
+        <div class="chart-controls">
+          <button class="chart-btn" onclick="animateMonthlyChart()">🎬 Animación</button>
+          <button class="chart-btn" onclick="randomizeMonthlyData()">🎲 Datos aleatorios</button>
+        </div>
+      </div>
+
+      <!-- Gráfica 2: Estado de Pedidos (Donut) -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2><i class="fas fa-chart-pie"></i> Estado de Pedidos</h2>
+          <div class="trend-badge"><i class="fas fa-sync-alt"></i> Actualizado</div>
+        </div>
+        <div class="donut-container">
+          <div class="donut-chart">
+            <canvas id="donutChart"></canvas>
+          </div>
+          <div class="donut-legend">
+            <div class="legend-item"><div class="legend-color entregado"></div><span id="legendEntregado">Entregado: 42%</span></div>
+            <div class="legend-item"><div class="legend-color confirmado"></div><span id="legendConfirmado">Confirmado: 28%</span></div>
+            <div class="legend-item"><div class="legend-color pendiente"></div><span id="legendPendiente">Pendiente: 30%</span></div>
+          </div>
+        </div>
+        <div class="chart-controls">
+          <button class="chart-btn" onclick="animateDonutChart()">🎬 Animación</button>
+          <button class="chart-btn" onclick="randomizeDonutData()">🎲 Cambiar datos</button>
+        </div>
+      </div>
+
+      <!-- Gráfica 3: Tendencia Semanal (Line) -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2><i class="fas fa-chart-line"></i> Tendencia Semanal</h2>
+          <div class="trend-badge"><i class="fas fa-waveform"></i> +8.3%</div>
+        </div>
+        <div class="chart-container">
+          <canvas id="weeklyTrendChart"></canvas>
+        </div>
+        <div class="chart-controls">
+          <button class="chart-btn" onclick="animateWeeklyChart()">🎬 Animación</button>
+          <button class="chart-btn" onclick="randomizeWeeklyData()">🎲 Nueva tendencia</button>
+          <button class="chart-btn" onclick="startAutoRotation()">🔄 Auto (5s)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de Pedidos Recientes -->
+    <div class="panel-card">
+      <div class="panel-header">
+        <h2><i class="fas fa-table-list"></i> Pedidos Recientes</h2>
+        <div class="view-all" onclick="verTodosPedidos()">Ver todos <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="table-wrapper">
+        <table class="pedidos-table">
+          <thead>
+            <tr><th>ID Pedido</th><th>Cliente</th><th>Fecha</th><th>Items</th><th>Monto</th><th>Estado</th></tr>
+          </thead>
+          <tbody id="pedidosTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><img src="assets/logo/logo.jpg" alt="Logo" class="footer-logo"><p>Sistema inteligente de inventario y atención al cliente</p></div>
+      <div><h3><i class="fas fa-map-marker-alt"></i> Contacto</h3><p>La Paz - Bolivia</p><p>+591 69160794</p><p>contacto@nextvision.com</p></div>
+      <div><h3><i class="fas fa-link"></i> Enlaces</h3><p>Términos y condiciones</p><p>Política de privacidad</p><p>Soporte técnico</p></div>
+    </div>
+    <div class="copyright"><i class="far fa-copyright"></i> 2026 NextVision. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+  // ==================== DATOS ====================
+  // Datos de pedidos recientes
+  const pedidosRecientes = [
+    { id: "ORD-1234", cliente: "Empresa TechSolutions", fecha: "2026-05-14", items: 5, monto: "$2,450", estado: "Entregado" },
+    { id: "ORD-1235", cliente: "Comercial López", fecha: "2026-05-14", items: 3, monto: "$1,890", estado: "Confirmado" },
+    { id: "ORD-1236", cliente: "Distribuidora Central", fecha: "2026-05-13", items: 8, monto: "$3,250", estado: "Pendiente" },
+    { id: "ORD-1237", cliente: "Importadora Global", fecha: "2026-05-13", items: 12, monto: "$4,100", estado: "Entregado" },
+    { id: "ORD-1238", cliente: "Tienda Digital Plus", fecha: "2026-05-12", items: 4, monto: "$1,560", estado: "Confirmado" },
+    { id: "ORD-1239", cliente: "Soluciones IT", fecha: "2026-05-12", items: 6, monto: "$2,780", estado: "Entregado" },
+    { id: "ORD-1240", cliente: "Grupo Empresarial XYZ", fecha: "2026-05-11", items: 15, monto: "$5,420", estado: "Pendiente" },
+    { id: "ORD-1241", cliente: "Comercio Virtual", fecha: "2026-05-11", items: 2, monto: "$980", estado: "Confirmado" }
+  ];
+
+  // Datos mensuales
+  const monthlyData = [44000, 53000, 48000, 61000, 56000, 59000, 62000, 58000, 64000, 67000, 69000, 72000];
+  const monthlyLabels = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+  // Datos semanales
+  const weeklyData = [12500, 14800, 13200, 16700, 18900, 22300, 19800];
+  const weeklyLabels = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+
+  // Variables de gráficas
+  let monthlyChart, donutChart, weeklyChart;
+  let autoRotationInterval = null;
+  let isAutoRotating = false;
+
+  // Datos del donut
+  let donutValues = [42, 28, 30];
+  let donutLabels = ['Entregado', 'Confirmado', 'Pendiente'];
+  let donutColors = ['#10B981', '#3B82F6', '#F59E0B'];
+
+  // ==================== FUNCIONES DE CLASE ESTADO ====================
+  function getEstadoClass(estado) {
+    switch(estado) {
+      case "Entregado": return "status-entregado";
+      case "Confirmado": return "status-confirmado";
+      case "Pendiente": return "status-pendiente";
+      default: return "status-pendiente";
+    }
+  }
+
+  function renderPedidosTable() {
+    const tbody = document.getElementById("pedidosTableBody");
+    tbody.innerHTML = "";
+    pedidosRecientes.forEach(p => {
+      const row = tbody.insertRow();
+      row.innerHTML = `<td>${p.id}</td><td>${p.cliente}</td><td>${p.fecha}</td><td>${p.items}</td><td>${p.monto}</td><td><span class="status-badge ${getEstadoClass(p.estado)}">${p.estado}</span></td>`;
+    });
+  }
+
+  // ==================== GRÁFICA 1: VENTAS MENSUALES (BAR) ====================
+  function initMonthlyChart() {
+    const ctx = document.getElementById('monthlySalesChart').getContext('2d');
+    monthlyChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: monthlyLabels,
+        datasets: [{
+          label: 'Ventas (USD)',
+          data: [...monthlyData],
+          backgroundColor: 'rgba(59,130,246,0.7)',
+          borderColor: '#3B82F6',
+          borderWidth: 1,
+          borderRadius: 8,
+          hoverBackgroundColor: 'rgba(59,130,246,0.9)'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        animation: { duration: 1000, easing: 'easeInOutQuart' },
+        onClick: (event, activeElements) => {
+          if (activeElements.length > 0) {
+            const idx = activeElements[0].dataIndex;
+            alert(`📊 ${monthlyLabels[idx]}: $${monthlyChart.data.datasets[0].data[idx].toLocaleString()} USD`);
+          }
+        },
+        plugins: {
+          legend: { labels: { color: '#94A3B8', font: { size: 10 } } },
+          tooltip: {
+            backgroundColor: '#0F172A', titleColor: '#F8FAFC', bodyColor: '#CBD5E1',
+            borderColor: '#3B82F6', borderWidth: 1,
+            callbacks: { label: (ctx) => `💰 $${ctx.raw.toLocaleString()} USD` }
+          }
+        },
+        scales: {
+          y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8', callback: (v) => `$${v.toLocaleString()}` } },
+          x: { grid: { display: false }, ticks: { color: '#94A3B8' } }
+        }
+      }
+    });
+  }
+
+  function animateMonthlyChart() {
+    if (monthlyChart) {
+      monthlyChart.update({ duration: 800, easing: 'easeInOutQuad' });
+    }
+  }
+
+  function randomizeMonthlyData() {
+    const newData = monthlyLabels.map(() => Math.floor(Math.random() * 40000) + 35000);
+    monthlyChart.data.datasets[0].data = newData;
+    monthlyChart.update({ duration: 600, easing: 'easeInOutQuad' });
+  }
+
+  // ==================== GRÁFICA 2: DONUT ====================
+  function initDonutChart() {
+    const ctx = document.getElementById('donutChart').getContext('2d');
+    donutChart = new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: donutLabels,
+        datasets: [{
+          data: [...donutValues],
+          backgroundColor: donutColors,
+          borderWidth: 0,
+          hoverOffset: 10
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        animation: { duration: 1000, easing: 'easeInOutQuart' },
+        onClick: (event, activeElements) => {
+          if (activeElements.length > 0) {
+            const idx = activeElements[0].dataIndex;
+            alert(`📊 ${donutLabels[idx]}: ${donutValues[idx]}% del total de pedidos`);
+          }
+        },
+        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0F172A', callbacks: { label: (ctx) => `${ctx.label}: ${ctx.raw}%` } } },
+        cutout: '65%'
+      }
+    });
+  }
+
+  function updateDonutLegend() {
+    document.getElementById('legendEntregado').innerHTML = `Entregado: ${donutValues[0]}%`;
+    document.getElementById('legendConfirmado').innerHTML = `Confirmado: ${donutValues[1]}%`;
+    document.getElementById('legendPendiente').innerHTML = `Pendiente: ${donutValues[2]}%`;
+  }
+
+  function animateDonutChart() {
+    if (donutChart) donutChart.update({ duration: 800, easing: 'easeInOutQuad' });
+  }
+
+  function randomizeDonutData() {
+    const total = 100;
+    let v1 = Math.floor(Math.random() * 60) + 10;
+    let v2 = Math.floor(Math.random() * (total - v1 - 5)) + 5;
+    let v3 = total - v1 - v2;
+    donutValues = [v1, v2, v3];
+    donutChart.data.datasets[0].data = [...donutValues];
+    donutChart.update({ duration: 600, easing: 'easeInOutQuad' });
+    updateDonutLegend();
+  }
+
+  // ==================== GRÁFICA 3: TENDENCIA SEMANAL (LINE) ====================
+  function initWeeklyChart() {
+    const ctx = document.getElementById('weeklyTrendChart').getContext('2d');
+    weeklyChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: weeklyLabels,
+        datasets: [{
+          label: 'Ventas (USD)',
+          data: [...weeklyData],
+          borderColor: '#3B82F6',
+          backgroundColor: 'rgba(59,130,246,0.1)',
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: '#3B82F6',
+          pointBorderColor: '#ffffff',
+          pointRadius: 5,
+          pointHoverRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        animation: { duration: 1000, easing: 'easeInOutQuart' },
+        onClick: (event, activeElements) => {
+          if (activeElements.length > 0) {
+            const idx = activeElements[0].dataIndex;
+            alert(`📈 ${weeklyLabels[idx]}: $${weeklyChart.data.datasets[0].data[idx].toLocaleString()} USD`);
+          }
+        },
+        plugins: {
+          legend: { labels: { color: '#94A3B8', font: { size: 10 } } },
+          tooltip: { backgroundColor: '#0F172A', callbacks: { label: (ctx) => `💰 $${ctx.raw.toLocaleString()} USD` } }
+        },
+        scales: {
+          y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94A3B8', callback: (v) => `$${v.toLocaleString()}` } },
+          x: { grid: { display: false }, ticks: { color: '#94A3B8' } }
+        }
+      }
+    });
+  }
+
+  function animateWeeklyChart() {
+    if (weeklyChart) weeklyChart.update({ duration: 800, easing: 'easeInOutQuad' });
+  }
+
+  function randomizeWeeklyData() {
+    const newData = weeklyLabels.map(() => Math.floor(Math.random() * 15000) + 8000);
+    weeklyChart.data.datasets[0].data = newData;
+    weeklyChart.update({ duration: 600, easing: 'easeInOutQuad' });
+  }
+
+  // Auto-rotación de tendencia semanal
+  function startAutoRotation() {
+    if (autoRotationInterval) {
+      clearInterval(autoRotationInterval);
+      autoRotationInterval = null;
+      isAutoRotating = false;
+      const autoBtn = document.querySelector('[onclick="startAutoRotation()"]');
+      if (autoBtn) {
+        autoBtn.textContent = '🔄 Auto (5s)';
+        autoBtn.style.background = 'rgba(59,130,246,.15)';
+        autoBtn.style.color = 'var(--gray)';
+      }
+    } else {
+      isAutoRotating = true;
+      autoRotationInterval = setInterval(() => {
+        randomizeWeeklyData();
+      }, 5000);
+      const autoBtn = document.querySelector('[onclick="startAutoRotation()"]');
+      if (autoBtn) {
+        autoBtn.textContent = '⏹️ Detener Auto';
+        autoBtn.style.background = '#3B82F6';
+        autoBtn.style.color = 'white';
+      }
+    }
+  }
+
+  // Ver todos los pedidos
+  function verTodosPedidos() {
+    alert("📋 Mostrando todos los pedidos registrados\n\nTotal de pedidos en el sistema: 156");
+  }
+
+  // Inicializar todo
+  function init() {
+    renderPedidosTable();
+    initMonthlyChart();
+    initDonutChart();
+    initWeeklyChart();
+  }
+
+  init();
+</script>
+
+</body>
+</html>

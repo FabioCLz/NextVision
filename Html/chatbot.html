@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Chatbot Inteligente | NextVision</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/chatbot.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+ 
+
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <img src="/assets/logo/logo.jpg" alt="NextVision Logo">
+      </div>
+      <div class="nav-links">
+          <a href="/Html/index.html">Inicio</a>
+          <a href="/Html/servicios.html">Servicios</a>
+          <a href="/Html/Sistema.html">Sistema</a>
+          <a href="/Html/Nosotros.html">Nosotros</a>
+          <a href="/Html/Contacto.html">Contacto</a>
+        </div> 
+    </nav>
+  </div>
+</header>
+
+<main class="chatbot-main">
+  <div class="container">
+
+    <div class="page-title">
+      <h1>
+        <i class="fas fa-robot"></i> 
+        Chatbot Inteligente
+      </h1>
+      <p>Asistente virtual para atención al cliente 24/7</p>
+    </div>
+
+    <div class="chat-grid">
+
+      <!-- Panel del Chat -->
+      <div class="chat-panel">
+        <div class="chat-header">
+          <div class="chat-header-info">
+            <div class="chat-avatar">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div class="chat-header-text">
+              <h3>NextVision Assistant</h3>
+              <div class="online-status">
+                <i class="fas fa-circle"></i>
+                <span>En línea - Respuesta inmediata</span>
+              </div>
+            </div>
+          </div>
+          <div class="chat-header-time">
+            <i class="far fa-clock"></i> 24/7
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+          <!-- Mensaje inicial del bot -->
+          <div class="message message-bot">
+            <div class="message-avatar">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div>
+              <div class="message-bubble">
+                ¡Hola! Soy el asistente virtual de NextVision. ¿En qué puedo ayudarte hoy?
+              </div>
+              <div class="message-time">10:30 AM</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Escribe tu mensaje..." onkeypress="handleKeyPress(event)">
+          <button class="send-btn" id="sendBtn">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+
+        <div class="quick-replies">
+          <div class="quick-replies-title">Respuestas Rápidas</div>
+          <div class="quick-buttons">
+            <button class="quick-btn" data-message="¿Cuál es el stock actual de productos?">📦 Consultar stock</button>
+            <button class="quick-btn" data-message="¿Cuáles son los precios de los productos?">💰 Ver precios</button>
+            <button class="quick-btn" data-message="¿Cómo puedo revisar el estado de mi pedido?">📋 Revisar pedidos</button>
+            <button class="quick-btn" data-message="¿Cuál es el horario de atención?">⏰ Horarios de atención</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel de Estadísticas -->
+      <div class="stats-panel">
+        <div class="stats-card">
+          <h3><i class="fas fa-chart-line"></i> Estadísticas del Chat</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-label"><i class="fas fa-comments"></i> Consultas hoy</span>
+              <span class="stat-value">127</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label"><i class="fas fa-hourglass-half"></i> Tiempo promedio</span>
+              <span class="stat-value">2.3 <span class="stat-unit">min</span></span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label"><i class="fas fa-smile"></i> Satisfacción</span>
+              <div style="text-align: right;">
+                <span class="stat-value">94<span class="stat-unit">%</span></span>
+                <div class="satisfaction-bar">
+                  <div class="bar"><div class="fill"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-card support-card">
+          <h3><i class="fas fa-headset"></i> ¿Necesitas ayuda personalizada?</h3>
+          <p>Contacta con nuestro equipo de soporte</p>
+          <button class="btn-support" id="supportBtn">
+            <i class="fas fa-envelope"></i> Contactar soporte
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo/logo.jpg" alt="Logo NextVision" class="footer-logo">
+        <p>Sistema inteligente de inventario y atención al cliente</p>
+      </div>
+      <div>
+        <h3><i class="fas fa-map-marker-alt" style="margin-right:8px; color:var(--primary);"></i> Contacto</h3>
+        <p>La Paz - Bolivia</p>
+        <p>+591 69160794</p>
+        <p>contacto@nextvision.com</p>
+      </div>
+      <div>
+        <h3><i class="fas fa-link" style="margin-right:8px; color:var(--primary);"></i> Enlaces</h3>
+        <p>Términos y condiciones</p>
+        <p>Política de privacidad</p>
+        <p>Soporte técnico</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <i class="far fa-copyright"></i> 2026 NextVision. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Datos simulados de respuestas del chatbot
+  const botResponses = {
+    default: "Gracias por tu mensaje. Un asesor se pondrá en contacto contigo pronto. ¿Hay algo más en lo que pueda ayudarte?",
+    stock: "📦 **Stock actual de productos:**\n\n• Laptop Dell XPS 15: 12 unidades\n• Mouse Logitech MX: 5 unidades\n• Teclado Mecánico: 0 unidades\n• Monitor LG 27\": 8 unidades\n• Webcam HD Pro: 15 unidades\n\n¿Te gustaría conocer el stock de algún producto en específico?",
+    precios: "💰 **Lista de precios:**\n\n• Laptop Dell XPS 15: $1,299\n• Mouse Logitech MX Master 3: $89\n• Teclado Mecánico RGB: $149\n• Monitor LG 27\" 4K: $449\n• Webcam HD Pro: $79\n• Auriculares Sony: $349\n\n¿Necesitas cotizar algún producto?",
+    pedidos: "📋 Para revisar el estado de tu pedido, necesito tu número de orden. Por favor, compártelo y te daré información actualizada.\n\nFormato: ORD-XXXXXX",
+    horarios: "⏰ **Horario de atención:**\n\n• Lunes a Viernes: 8:00 AM - 8:00 PM\n• Sábados: 9:00 AM - 4:00 PM\n• Domingos: Atención limitada vía chat\n\nNuestro chatbot está disponible 24/7 para consultas básicas."
+  };
+
+  let consultasHoy = 127;
+  let tiempoAcumulado = 0;
+  let totalMensajes = 0;
+
+  // Elementos DOM
+  const chatMessages = document.getElementById("chatMessages");
+  const chatInput = document.getElementById("chatInput");
+  const sendBtn = document.getElementById("sendBtn");
+
+  // Función para obtener la hora actual
+  function getCurrentTime() {
+    const now = new Date();
+    return now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  // Función para agregar mensaje del usuario
+  function addUserMessage(message) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "message message-user";
+    messageDiv.innerHTML = `
+      <div class="message-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+      <div>
+        <div class="message-bubble">
+          ${escapeHtml(message)}
+        </div>
+        <div class="message-time">${getCurrentTime()}</div>
+      </div>
+    `;
+    chatMessages.appendChild(messageDiv);
+    scrollToBottom();
+  }
+
+  // Función para agregar mensaje del bot
+  function addBotMessage(message) {
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "message message-bot";
+    messageDiv.innerHTML = `
+      <div class="message-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div>
+        <div class="message-bubble">
+          ${formatMessage(message)}
+        </div>
+        <div class="message-time">${getCurrentTime()}</div>
+      </div>
+    `;
+    chatMessages.appendChild(messageDiv);
+    scrollToBottom();
+  }
+
+  // Formatear mensaje (convertir saltos de línea a <br>)
+  function formatMessage(message) {
+    return message.replace(/\n/g, '<br>');
+  }
+
+  // Escapar HTML para evitar inyección
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Scroll al final del chat
+  function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  // Simular escritura del bot
+  function simulateBotTyping(callback) {
+    const typingDiv = document.createElement("div");
+    typingDiv.className = "message message-bot";
+    typingDiv.id = "typingIndicator";
+    typingDiv.innerHTML = `
+      <div class="message-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div>
+        <div class="message-bubble">
+          <i class="fas fa-ellipsis-h"></i> Escribiendo...
+        </div>
+      </div>
+    `;
+    chatMessages.appendChild(typingDiv);
+    scrollToBottom();
+
+    setTimeout(() => {
+      const typing = document.getElementById("typingIndicator");
+      if (typing) typing.remove();
+      callback();
+    }, 800);
+  }
+
+  // Procesar mensaje del usuario y generar respuesta
+  function processUserMessage(message) {
+    const lowerMessage = message.toLowerCase();
+    let response = botResponses.default;
+
+    // Actualizar estadísticas
+    totalMensajes++;
+    consultasHoy++;
+
+    // Tiempo de respuesta simulado (entre 1 y 3 segundos)
+    const responseTime = Math.random() * 2 + 1;
+    tiempoAcumulado += responseTime;
+    
+    // Actualizar display de estadísticas
+    updateStatsDisplay();
+
+    // Detectar intención
+    if (lowerMessage.includes("stock") || lowerMessage.includes("inventario") || lowerMessage.includes("disponible")) {
+      response = botResponses.stock;
+    } else if (lowerMessage.includes("precio") || lowerMessage.includes("costo") || lowerMessage.includes("valor") || lowerMessage.includes("cuánto cuesta")) {
+      response = botResponses.precios;
+    } else if (lowerMessage.includes("pedido") || lowerMessage.includes("orden") || lowerMessage.includes("seguimiento")) {
+      response = botResponses.pedidos;
+    } else if (lowerMessage.includes("horario") || lowerMessage.includes("atencion") || lowerMessage.includes("días")) {
+      response = botResponses.horarios;
+    } else if (lowerMessage.includes("hola") || lowerMessage.includes("buenos días") || lowerMessage.includes("buenas tardes")) {
+      response = "¡Hola! ¿Cómo puedo ayudarte hoy? Puedo consultar stock, precios, pedidos o informarte sobre nuestros horarios.";
+    } else if (lowerMessage.includes("gracias")) {
+      response = "¡De nada! Estoy aquí para ayudarte cuando lo necesites. ¿Hay algo más en lo que pueda asistirte?";
+    }
+
+    // Mostrar respuesta del bot
+    simulateBotTyping(() => {
+      addBotMessage(response);
+    });
+  }
+
+  // Actualizar estadísticas en el panel
+  function updateStatsDisplay() {
+    const statsValues = document.querySelectorAll('.stat-value');
+    if (statsValues.length >= 3) {
+      statsValues[0].textContent = consultasHoy;
+      const avgTime = (tiempoAcumulado / totalMensajes).toFixed(1);
+      if (totalMensajes > 0 && !isNaN(avgTime)) {
+        statsValues[1].innerHTML = `${avgTime} <span class="stat-unit">min</span>`;
+      }
+    }
+  }
+
+  // Enviar mensaje
+  function sendMessage() {
+    const message = chatInput.value.trim();
+    if (message === "") return;
+
+    addUserMessage(message);
+    chatInput.value = "";
+    processUserMessage(message);
+  }
+
+  // Manejar tecla Enter
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      sendMessage();
+    }
+  }
+
+  // Botones rápidos
+  document.querySelectorAll(".quick-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const message = btn.getAttribute("data-message");
+      if (message) {
+        addUserMessage(message);
+        processUserMessage(message);
+      }
+    });
+  });
+
+  // Botón de soporte
+  document.getElementById("supportBtn").addEventListener("click", () => {
+    addUserMessage("Necesito contactar con soporte humano");
+    simulateBotTyping(() => {
+      addBotMessage("📞 **Contacto con soporte humano**\n\nPor favor, envía un correo a **soporte@nextvision.com** o llámanos al **+591 69160794**. Un asesor te atenderá en breve.\n\nHorario de soporte: Lunes a Viernes 8:00 AM - 6:00 PM");
+    });
+  });
+
+  // Event listeners
+  sendBtn.addEventListener("click", sendMessage);
+  chatInput.addEventListener("keypress", handleKeyPress);
+
+  // Inicializar estadísticas
+  updateStatsDisplay();
+</script>
+
+</body>
+</html>

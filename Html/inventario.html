@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Inventario | NextVision</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/inventario.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <img src="assets/logo/logo.jpg" alt="NextVision Logo">
+      </div>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="inventario.html">Inventario</a>
+        <a href="chatbot.html">Chatbot</a>
+        <a href="pedidos.html">Pedidos</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="inventario-main">
+  <div class="container">
+
+    <div class="page-title">
+      <h1>
+        <i class="fas fa-boxes"></i> 
+        Inventario
+      </h1>
+      <p>Gestión completa de productos</p>
+    </div>
+
+    <!-- Barra de acciones -->
+    <div class="action-bar">
+      <div class="action-buttons">
+        <button class="btn-action" id="exportBtn">
+          <i class="fas fa-download"></i> Exportar
+        </button>
+        <button class="btn-action btn-primary-action" id="addProductBtn">
+          <i class="fas fa-plus"></i> Agregar producto
+        </button>
+      </div>
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Buscar producto...">
+      </div>
+    </div>
+
+    <!-- Tabs de categorías -->
+    <div class="tabs-container">
+      <div class="tabs">
+        <button class="tab active" data-category="todos">Todos</button>
+        <button class="tab" data-category="Electrónica">Electrónica</button>
+        <button class="tab" data-category="Accesorios">Accesorios</button>
+        <button class="tab" data-category="Audio">Audio</button>
+        <button class="tab" data-category="Oficina">Oficina</button>
+        <button class="tab" data-category="Almacenamiento">Almacenamiento</button>
+        <button class="tab" data-category="Redes">Redes</button>
+        <button class="tab" data-category="Cables">Cables</button>
+      </div>
+    </div>
+
+    <!-- Tabla de productos -->
+    <div class="table-wrapper">
+      <table class="product-table" id="productTable">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Stock</th>
+            <th>Precio</th>
+            <th>Estado</th>
+            <th>Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div class="pagination-info" id="paginationInfo"></div>
+    <div class="pagination" id="pagination"></div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo/logo.jpg" alt="Logo NextVision" class="footer-logo">
+        <p>Sistema inteligente de inventario y atención al cliente</p>
+      </div>
+      <div>
+        <h3><i class="fas fa-map-marker-alt" style="margin-right:8px; color:var(--primary);"></i> Contacto</h3>
+        <p>La Paz - Bolivia</p>
+        <p>+591 69160794</p>
+        <p>contacto@nextvision.com</p>
+      </div>
+      <div>
+        <h3><i class="fas fa-link" style="margin-right:8px; color:var(--primary);"></i> Enlaces</h3>
+        <p>Términos y condiciones</p>
+        <p>Política de privacidad</p>
+        <p>Soporte técnico</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <i class="far fa-copyright"></i> 2026 NextVision. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<!-- Modal para agregar/editar producto -->
+<div class="modal" id="productModal">
+  <div class="modal-content">
+    <h3><i class="fas fa-box"></i> <span id="modalTitle">Agregar Producto</span></h3>
+    <input type="text" id="productCode" placeholder="Código" readonly style="background:rgba(255,255,255,0.05);">
+    <input type="text" id="productName" placeholder="Nombre del producto">
+    <select id="productCategory">
+      <option value="Electrónica">Electrónica</option>
+      <option value="Accesorios">Accesorios</option>
+      <option value="Audio">Audio</option>
+      <option value="Oficina">Oficina</option>
+      <option value="Almacenamiento">Almacenamiento</option>
+      <option value="Redes">Redes</option>
+      <option value="Cables">Cables</option>
+    </select>
+    <input type="number" id="productStock" placeholder="Stock">
+    <input type="text" id="productPrice" placeholder="Precio (ej: $299)">
+    <div class="modal-buttons">
+      <button class="close-modal" id="cancelModal">Cancelar</button>
+      <button class="btn-action btn-primary-action" id="saveProduct">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ============================================
+  // PRODUCTOS - 12 PRODUCTOS CON PRECIO
+  // ============================================
+  let productos = [
+    { codigo: "PRD-001", nombre: "Laptop Dell XPS 15", categoria: "Electrónica", stock: 12, precio: "$1299", estado: "Disponible" },
+    { codigo: "PRD-002", nombre: "Mouse Logitech MX Master 3", categoria: "Accesorios", stock: 5, precio: "$89", estado: "Bajo stock" },
+    { codigo: "PRD-003", nombre: "Teclado Mecánico RGB", categoria: "Accesorios", stock: 0, precio: "$149", estado: "Agotado" },
+    { codigo: "PRD-004", nombre: "Monitor LG 27\" 4K", categoria: "Electrónica", stock: 8, precio: "$449", estado: "Disponible" },
+    { codigo: "PRD-005", nombre: "Webcam HD Pro 1080p", categoria: "Accesorios", stock: 15, precio: "$79", estado: "Disponible" },
+    { codigo: "PRD-006", nombre: "Auriculares Sony WH-1000XM5", categoria: "Audio", stock: 20, precio: "$349", estado: "Disponible" },
+    { codigo: "PRD-007", nombre: "SSD Samsung 1TB", categoria: "Almacenamiento", stock: 3, precio: "$129", estado: "Bajo stock" },
+    { codigo: "PRD-008", nombre: "Router TP-Link AX3000", categoria: "Redes", stock: 25, precio: "$99", estado: "Disponible" },
+    { codigo: "PRD-009", nombre: "Impresora HP LaserJet", categoria: "Oficina", stock: 0, precio: "$299", estado: "Agotado" },
+    { codigo: "PRD-010", nombre: "Cable HDMI 2.1", categoria: "Cables", stock: 50, precio: "$19", estado: "Disponible" },
+    { codigo: "PRD-011", nombre: "Adaptador USB-C Hub", categoria: "Accesorios", stock: 30, precio: "$39", estado: "Disponible" },
+    { codigo: "PRD-012", nombre: "Micrófono Blue Yeti", categoria: "Audio", stock: 7, precio: "$129", estado: "Disponible" }
+  ];
+
+  let currentCategory = "todos";
+  let currentSearch = "";
+  let currentPage = 1;
+  const itemsPerPage = 10;
+
+  // Función para obtener clase de estado
+  function getEstadoClass(estado) {
+    if (estado === "Disponible") return "status-available";
+    if (estado === "Bajo stock") return "status-low";
+    return "status-out";
+  }
+
+  // Filtrar productos
+  function filterProducts() {
+    return productos.filter(p => {
+      const matchCategory = currentCategory === "todos" || p.categoria === currentCategory;
+      const matchSearch = p.nombre.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                          p.codigo.toLowerCase().includes(currentSearch.toLowerCase());
+      return matchCategory && matchSearch;
+    });
+  }
+
+  // Renderizar tabla
+  function renderTable() {
+    const filtered = filterProducts();
+    const totalItems = filtered.length;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const start = (currentPage - 1) * itemsPerPage;
+    const paginated = filtered.slice(start, start + itemsPerPage);
+
+    const tbody = document.getElementById("tableBody");
+    tbody.innerHTML = "";
+
+    if (paginated.length === 0) {
+      const row = tbody.insertRow();
+      row.innerHTML = `<td colspan="7" style="text-align:center; padding:3rem;">No hay productos que coincidan con la búsqueda</td>`;
+    } else {
+      paginated.forEach(p => {
+        const row = tbody.insertRow();
+        row.innerHTML = `
+          <td>${p.codigo}</td>
+          <td>${p.nombre}</td>
+          <td>${p.categoria}</td>
+          <td>${p.stock}</td>
+          <td>${p.precio}</td>
+          <td><span class="status-badge ${getEstadoClass(p.estado)}">${p.estado}</span></td>
+          <td class="action-icons">
+            <i class="fas fa-edit" onclick="editProduct('${p.codigo}')"></i>
+            <i class="fas fa-trash-alt" onclick="deleteProduct('${p.codigo}')"></i>
+          </td>
+        `;
+      });
+    }
+
+    // Información de paginación
+    if (totalItems > 0) {
+      document.getElementById("paginationInfo").innerHTML = `Mostrando ${start+1}-${Math.min(start+itemsPerPage, totalItems)} de ${totalItems} productos`;
+    } else {
+      document.getElementById("paginationInfo").innerHTML = `Mostrando 0 productos`;
+    }
+
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages) {
+    const paginationDiv = document.getElementById("pagination");
+    paginationDiv.innerHTML = "";
+
+    if (totalPages <= 1) return;
+
+    const prevBtn = document.createElement("button");
+    prevBtn.className = "page-btn";
+    prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i> Anterior';
+    prevBtn.onclick = () => { if (currentPage > 1) { currentPage--; renderTable(); } };
+    paginationDiv.appendChild(prevBtn);
+
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, startPage + 4);
+    
+    for (let i = startPage; i <= endPage; i++) {
+      const pageBtn = document.createElement("button");
+      pageBtn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+      pageBtn.textContent = i;
+      pageBtn.onclick = () => { currentPage = i; renderTable(); };
+      paginationDiv.appendChild(pageBtn);
+    }
+
+    const nextBtn = document.createElement("button");
+    nextBtn.className = "page-btn";
+    nextBtn.innerHTML = 'Siguiente <i class="fas fa-chevron-right"></i>';
+    nextBtn.onclick = () => { if (currentPage < totalPages) { currentPage++; renderTable(); } };
+    paginationDiv.appendChild(nextBtn);
+  }
+
+  // Generar nuevo código
+  function generateNewCode() {
+    const numbers = productos.map(p => parseInt(p.codigo.split('-')[1])).filter(n => !isNaN(n));
+    const maxNum = Math.max(...numbers, 0);
+    const newNum = String(maxNum + 1).padStart(3, '0');
+    return `PRD-${newNum}`;
+  }
+
+  function getEstado(stock) {
+    if (stock <= 0) return "Agotado";
+    if (stock < 6) return "Bajo stock";
+    return "Disponible";
+  }
+
+  function addProduct(product) {
+    const newCode = generateNewCode();
+    const newProduct = {
+      codigo: newCode,
+      nombre: product.nombre,
+      categoria: product.categoria,
+      stock: parseInt(product.stock),
+      precio: product.precio.startsWith('$') ? product.precio : '$' + product.precio,
+      estado: getEstado(parseInt(product.stock))
+    };
+    productos.push(newProduct);
+    currentPage = 1;
+    renderTable();
+  }
+
+  window.editProduct = function(codigo) {
+    const producto = productos.find(p => p.codigo === codigo);
+    if (producto) {
+      document.getElementById("modalTitle").textContent = "Editar Producto";
+      document.getElementById("productCode").value = producto.codigo;
+      document.getElementById("productName").value = producto.nombre;
+      document.getElementById("productCategory").value = producto.categoria;
+      document.getElementById("productStock").value = producto.stock;
+      document.getElementById("productPrice").value = producto.precio;
+      document.getElementById("productModal").style.display = "flex";
+      window.editingCode = codigo;
+    }
+  };
+
+  window.deleteProduct = function(codigo) {
+    if (confirm("¿Eliminar este producto?")) {
+      productos = productos.filter(p => p.codigo !== codigo);
+      const filtered = filterProducts();
+      const totalPages = Math.ceil(filtered.length / itemsPerPage);
+      if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+      else if (totalPages === 0) currentPage = 1;
+      renderTable();
+    }
+  };
+
+  // Modal
+  const modal = document.getElementById("productModal");
+  const addBtn = document.getElementById("addProductBtn");
+  const cancelModal = document.getElementById("cancelModal");
+  const saveProduct = document.getElementById("saveProduct");
+
+  addBtn.onclick = () => {
+    document.getElementById("modalTitle").textContent = "Agregar Producto";
+    document.getElementById("productCode").value = generateNewCode();
+    document.getElementById("productName").value = "";
+    document.getElementById("productCategory").value = "Electrónica";
+    document.getElementById("productStock").value = "";
+    document.getElementById("productPrice").value = "";
+    window.editingCode = null;
+    modal.style.display = "flex";
+  };
+
+  cancelModal.onclick = () => modal.style.display = "none";
+
+  saveProduct.onclick = () => {
+    const nombre = document.getElementById("productName").value.trim();
+    const categoria = document.getElementById("productCategory").value;
+    const stock = parseInt(document.getElementById("productStock").value);
+    let precio = document.getElementById("productPrice").value.trim();
+    if (!precio.startsWith("$")) precio = "$" + precio;
+
+    if (!nombre || isNaN(stock) || stock < 0) {
+      alert("Complete todos los campos correctamente");
+      return;
+    }
+
+    if (window.editingCode) {
+      const index = productos.findIndex(p => p.codigo === window.editingCode);
+      if (index !== -1) {
+        productos[index] = { ...productos[index], nombre, categoria, stock, precio, estado: getEstado(stock) };
+      }
+    } else {
+      addProduct({ nombre, categoria, stock, precio });
+    }
+    modal.style.display = "none";
+    renderTable();
+  };
+
+  window.onclick = (e) => { if (e.target === modal) modal.style.display = "none"; };
+
+  // Tabs
+  document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      currentCategory = tab.dataset.category;
+      currentPage = 1;
+      renderTable();
+    });
+  });
+
+  // Búsqueda
+  document.getElementById("searchInput").addEventListener("input", (e) => {
+    currentSearch = e.target.value;
+    currentPage = 1;
+    renderTable();
+  });
+
+  // Exportar
+  document.getElementById("exportBtn").addEventListener("click", () => {
+    const filtered = filterProducts();
+    let csv = "\uFEFFCódigo,Producto,Categoría,Stock,Precio,Estado\n";
+    filtered.forEach(p => {
+      csv += `${p.codigo},${p.nombre},${p.categoria},${p.stock},${p.precio},${p.estado}\n`;
+    });
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "inventario_nextvision.csv";
+    link.click();
+    alert("✅ Inventario exportado correctamente");
+  });
+
+  // Render inicial
+  renderTable();
+</script>
+
+</body>
+</html>

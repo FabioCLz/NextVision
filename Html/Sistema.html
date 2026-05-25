@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard | NextVision</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/sistema.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <img src="/assets/logo/logo.jpg" alt="NextVision Logo">
+      </div>
+      <div class="nav-links">
+          <a href="/Html/index.html">Inicio</a>
+          <a href="/Html/servicios.html">Servicios</a>
+          <a href="/Html/Sistema.html">Sistema</a>
+          <a href="/Html/Nosotros.html">Nosotros</a>
+          <a href="/Html/Contacto.html">Contacto</a>
+        </div>  
+    </nav>
+  </div>
+</header>
+
+<main class="dashboard-main">
+  <div class="container">
+
+    <div class="page-title">
+      <h1>
+        <i class="fas fa-chalkboard-user"></i> 
+        Dashboard
+      </h1> 
+      <p>Resumen general de tu sistema / Panel de control inteligente</p>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <h3><i class="fas fa-box" style="margin-right: 5px;"></i> Productos Registrados</h3>
+          <div class="kpi-number">1,247</div>
+        </div>
+        <div class="kpi-icon"><i class="fas fa-cube"></i></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <h3><i class="fas fa-shopping-cart" style="margin-right: 5px;"></i> Pedidos del Día</h3>
+          <div class="kpi-number">89</div>
+        </div>
+        <div class="kpi-icon"><i class="fas fa-truck"></i></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <h3><i class="fas fa-users" style="margin-right: 5px;"></i> Clientes Atendidos</h3>
+          <div class="kpi-number">342</div>
+        </div>
+        <div class="kpi-icon"><i class="fas fa-user-check"></i></div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-info">
+          <h3><i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i> Stock Bajo</h3>
+          <div class="kpi-number">24</div>
+        </div>
+        <div class="kpi-icon"><i class="fas fa-chart-line"></i></div>
+      </div>
+    </div>
+
+    <!-- Gráfica + Stock -->
+    <div class="dashboard-grid-2">
+      <!-- Ventas de la Semana - GRÁFICA INTERACTIVA Y ANIMADA -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2><i class="fas fa-chart-line"></i> Ventas de la Semana</h2>
+          <div class="trend-badge"><i class="fas fa-arrow-up"></i> +15.3%</div>
+        </div>
+        <div class="chart-container">
+          <canvas id="weeklySalesChart"></canvas>
+        </div>
+        <div class="chart-controls">
+          <button class="chart-btn" data-dataset="real">📊 Datos reales</button>
+          <button class="chart-btn" data-dataset="forecast">📈 Proyección</button>
+          <button class="chart-btn" data-dataset="compare">📉 Comparativa</button>
+          <button class="chart-btn" data-animate="true">✨ Animación</button>
+        </div>
+      </div>
+
+      <!-- Estado de Stock -->
+      <div class="panel-card">
+        <div class="panel-header">
+          <h2><i class="fas fa-pie-chart"></i> Estado de Stock</h2>
+        </div>
+        <div class="stock-stats">
+          <div class="stock-item">
+            <div class="stock-label"><i class="fas fa-check-circle" style="color: #10B981;"></i><span>Disponible</span></div>
+            <div class="stock-bar-container"><div class="stock-bar bar-success" style="width: 85%"></div></div>
+            <div class="stock-percent">85%</div>
+          </div>
+          <div class="stock-item">
+            <div class="stock-label"><i class="fas fa-exclamation-triangle" style="color: #F59E0B;"></i><span>Bajo stock</span></div>
+            <div class="stock-bar-container"><div class="stock-bar bar-warning" style="width: 12%"></div></div>
+            <div class="stock-percent">12%</div>
+          </div>
+          <div class="stock-item">
+            <div class="stock-label"><i class="fas fa-times-circle" style="color: #EF4444;"></i><span>Agotado</span></div>
+            <div class="stock-bar-container"><div class="stock-bar bar-danger" style="width: 3%"></div></div>
+            <div class="stock-percent">3%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla Productos Recientes -->
+    <div class="panel-card">
+      <div class="panel-header">
+        <h2><i class="fas fa-table-list"></i> Productos Recientes</h2>
+        <div class="view-all" onclick="window.location.href='inventario.html'">Ver todos <i class="fas fa-arrow-right"></i></div>
+      </div>
+      <div class="table-wrapper">
+        <table class="product-table">
+          <thead><tr><th>Código</th><th>Producto</th><th>Categoría</th><th>Stock</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td>PRD-001</td><td>Laptop Dell XPS 15</td><td>Electrónica</td><td>12</td><td><span class="status-badge status-available">Disponible</span></td></tr>
+            <tr><td>PRD-002</td><td>Mouse Logitech MX</td><td>Accesorios</td><td>5</td><td><span class="status-badge status-low">Bajo stock</span></td></tr>
+            <tr><td>PRD-003</td><td>Teclado Mecánico</td><td>Accesorios</td><td>0</td><td><span class="status-badge status-out">Agotado</span></td></tr>
+            <tr><td>PRD-004</td><td>Monitor LG 27"</td><td>Electrónica</td><td>8</td><td><span class="status-badge status-available">Disponible</span></td></tr>
+            <tr><td>PRD-005</td><td>Webcam HD Pro</td><td>Accesorios</td><td>15</td><td><span class="status-badge status-available">Disponible</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <a href="/Html/inventario.html" class="btn-register">Registrar producto</a>
+      <a href="/Html/chatbot.html" class="btn-register">Chat bot   </a>
+      <a href="/Html/pedidos.html" class="btn-register">Pedidos</a>
+    </div>
+
+  </div>
+</main> 
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div><img src="/assets/logo/logo.jpg" alt="Logo" class="footer-logo"><p>Sistema inteligente de inventario y atención al cliente</p></div>
+      <div>
+        <h3><i class="fas fa-map-marker-alt" style="margin-right:8px; color:var(--primary);"></i> Contacto</h3>
+        <p>La Paz - Bolivia</p>
+        <p>+591 69160794</p>
+        <p>contacto@nextvision.com</p>
+      </div>
+      <div>
+        <h3><i class="fas fa-link" style="margin-right:8px; color:var(--primary);"></i> Enlaces</h3>
+        <p>Términos y condiciones</p>
+        <p>Política de privacidad</p>
+        <p>Soporte técnico</p>
+      </div>
+    </div>
+    <div class="copyright"><i class="far fa-copyright"></i> 2026 NextVision. Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<script>
+  // Datos para los diferentes datasets
+  const datasets = {
+    real: [4200, 5100, 4800, 6200, 7100, 8900, 7600],
+    forecast: [4500, 5300, 5600, 6800, 7900, 9500, 10200],
+    compare: [4000, 4900, 5100, 5900, 6800, 7700, 8200]
+  };
+
+  let currentDataset = 'real';
+  let chart;
+  let animationInterval = null;
+  let isAnimating = false;
+
+  // Función para crear/actualizar gráfica
+  function createChart(dataValues) {
+    if (chart) {
+      chart.destroy();
+    }
+
+    const ctx = document.getElementById('weeklySalesChart').getContext('2d');
+    
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+        datasets: [{
+          label: currentDataset === 'real' ? 'Ventas actuales' : (currentDataset === 'forecast' ? 'Proyección' : 'Año anterior'),
+          data: dataValues,
+          borderColor: '#3B82F6',
+          backgroundColor: 'rgba(59,130,246,0.1)',
+          borderWidth: 3,
+          tension: 0.4,
+          fill: true,
+          pointBackgroundColor: '#3B82F6',
+          pointBorderColor: '#ffffff',
+          pointRadius: 5,
+          pointHoverRadius: 8,
+          pointBorderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        animation: {
+          duration: 1000,
+          easing: 'easeInOutQuart'
+        },
+        interaction: {
+          mode: 'index',
+          intersect: false,
+        },
+        plugins: {
+          legend: {
+            labels: { color: '#94A3B8', font: { size: 11 } }
+          },
+          tooltip: {
+            backgroundColor: '#0F172A',
+            titleColor: '#F8FAFC',
+            bodyColor: '#CBD5E1',
+            borderColor: '#3B82F6',
+            borderWidth: 1,
+            callbacks: {
+              label: function(context) {
+                return `💰 ${context.raw.toLocaleString()} Bs`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            grid: { color: 'rgba(255,255,255,0.05)' },
+            ticks: { color: '#94A3B8', callback: function(value) { return value.toLocaleString(); } }
+          },
+          x: {
+            grid: { display: false },
+            ticks: { color: '#94A3B8', font: { weight: 'bold' } }
+          }
+        },
+        onClick: (event, activeElements) => {
+          if (activeElements.length > 0) {
+            const index = activeElements[0].dataIndex;
+            const day = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'][index];
+            const value = chart.data.datasets[0].data[index];
+            alert(`📊 ${day}\nVentas: ${value.toLocaleString()} Bs`);
+          }
+        }
+      }
+    });
+  }
+
+  // Función para animar los datos (movimiento)
+  function startAnimation() {
+    if (animationInterval) clearInterval(animationInterval);
+    isAnimating = true;
+    
+    let step = 0;
+    const datasetsList = ['real', 'forecast', 'compare'];
+    
+    animationInterval = setInterval(() => {
+      const newDataset = datasetsList[step % datasetsList.length];
+      currentDataset = newDataset;
+      updateChartData();
+      step++;
+    }, 3000);
+  }
+
+  function stopAnimation() {
+    if (animationInterval) {
+      clearInterval(animationInterval);
+      animationInterval = null;
+    }
+    isAnimating = false;
+  }
+
+  function updateChartData() {
+    if (chart) {
+      chart.data.datasets[0].data = [...datasets[currentDataset]];
+      chart.data.datasets[0].label = currentDataset === 'real' ? 'Ventas actuales' : (currentDataset === 'forecast' ? 'Proyección' : 'Año anterior');
+      chart.update({
+        duration: 800,
+        easing: 'easeInOutQuad'
+      });
+    } else {
+      createChart(datasets[currentDataset]);
+    }
+  }
+
+  // Inicializar gráfica
+  createChart(datasets.real);
+
+  // Controles de la gráfica
+  document.querySelectorAll('.chart-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const dataset = btn.dataset.dataset;
+      const animate = btn.dataset.animate;
+      
+      if (dataset) {
+        stopAnimation();
+        currentDataset = dataset;
+        updateChartData();
+      }
+      
+      if (animate === 'true') {
+        if (isAnimating) {
+          stopAnimation();
+          btn.textContent = '✨ Animación';
+          btn.style.background = 'rgba(59,130,246,.15)';
+          btn.style.color = 'var(--gray)';
+        } else {
+          startAnimation();
+          btn.textContent = '⏹️ Detener';
+          btn.style.background = '#3B82F6';
+          btn.style.color = 'white';
+        }
+      }
+      
+      // Resetear el texto del botón animación si se cambia de dataset
+      const animBtn = document.querySelector('[data-animate="true"]');
+      if (dataset && animBtn && !isAnimating) {
+        animBtn.textContent = '✨ Animación';
+        animBtn.style.background = 'rgba(59,130,246,.15)';
+        animBtn.style.color = 'var(--gray)';
+      }
+    });
+  });
+
+  // Efecto hover en la gráfica - brillo dinámico
+  const canvas = document.getElementById('weeklySalesChart');
+  canvas.addEventListener('mouseenter', () => {
+    canvas.style.filter = 'drop-shadow(0 0 12px rgba(59,130,246,0.4))';
+  });
+  canvas.addEventListener('mouseleave', () => {
+    canvas.style.filter = 'none';
+  });
+</script>
+
+</body>
+</html>

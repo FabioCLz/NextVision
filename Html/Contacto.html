@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contacto | NextVision</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/contacto.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <div class="logo">
+        <img src="/assets/logo/logo.jpg" alt="NextVision Logo">
+      </div>    
+      <div class="nav-links">
+        <a href="/Html/index.html">Inicio</a>
+        <a href="/Html/servicios.html">Servicios</a>
+        <a href="/Html/Sistema.html">Sistema</a>
+        <a href="/Html/Nosotros.html">Nosotros</a>
+        <a href="/Html/Contacto.html">Contacto</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="contacto-main">
+  <div class="container">
+
+    <div class="page-title">
+      <h1>
+        <i class="fas fa-envelope"></i> 
+        Contacto
+      </h1>
+      <p>Estamos aquí para ayudarte y responder tus preguntas</p>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="cta-banner">
+      <h2>¿Listo para transformar tu negocio?</h2>
+      <p>Solicita una demostración gratuita y descubre todo lo que NextVision puede hacer por ti.</p>
+      <button class="btn-cta" onclick="document.getElementById('formulario').scrollIntoView({behavior:'smooth'})">
+        <i class="fas fa-rocket"></i> Solicitar demostración
+      </button>
+    </div>
+
+    <!-- Contact Grid -->
+    <div class="contact-grid">
+      
+      <!-- Redes Sociales y Horario -->
+      <div class="info-card">
+        <h3><i class="fas fa-hashtag"></i> Conecta con nosotros</h3>
+        
+        <!-- Redes Sociales -->
+        <div class="social-section">
+          <h4><i class="fas fa-share-alt"></i> Síguenos en redes sociales</h4>
+          <div class="social-icons">
+            <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-icon telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="#" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Horario de Atención -->
+        <div class="hours-section">
+          <h4><i class="fas fa-clock"></i> Horario de Atención</h4>
+          <div class="hours-item"><span class="hours-day">Lunes a Viernes</span><span>8:00 AM - 8:00 PM</span></div>
+          <div class="hours-item"><span class="hours-day">Sábados</span><span>9:00 AM - 4:00 PM</span></div>
+          <div class="hours-item"><span class="hours-day">Domingos</span><span>Atención limitada vía chat</span></div>
+        </div>
+
+        <!-- Teléfonos de contacto -->
+        <div class="hours-section" style="margin-top: 1rem;">
+          <h4><i class="fas fa-phone-alt"></i> Líneas de atención</h4>
+          <div class="hours-item"><span class="hours-day">Teléfono fijo</span><span>+591 2 1234567</span></div>
+          <div class="hours-item"><span class="hours-day">WhatsApp</span><span>+591 69160794</span></div>
+          <div class="hours-item"><span class="hours-day">Email</span><span>contacto@nextvision.com</span></div>
+        </div>
+      </div>
+
+      <!-- Formulario de Contacto -->
+      <div class="form-card" id="formulario">
+        <h3><i class="fas fa-calendar-check"></i> Agenda tu demostración</h3>
+        <p>Completa tus datos y el equipo de NextVision te contactará.</p>
+        
+        <form id="contactForm">
+          <div class="form-row">
+            <input type="text" placeholder="Tu nombre" required>
+            <input type="text" placeholder="Empresa">
+          </div>
+          <div class="form-row">
+            <input type="email" placeholder="correo@empresa.com" required>
+            <input type="tel" placeholder="+591">
+          </div>
+          <select>
+            <option>Selecciona una opción</option>
+            <option>Consultar Inventario</option>
+            <option>Chatbot Inteligente</option>
+            <option>Reportes y Análisis</option>
+            <option>Soporte Técnico</option>
+            <option>Otros</option>
+          </select>
+          <textarea placeholder="Cuéntanos brevemente qué buscas implementar"></textarea>
+          <button class="btn-submit" type="submit">
+            <i class="fas fa-paper-plane"></i> Solicitar demostración
+          </button>
+        </form>
+
+        <p style="font-size: 0.7rem; color: var(--gray); text-align: center; margin-top: 1rem;">
+          <i class="fas fa-lock"></i> Tus datos están seguros. No compartimos tu información con terceros.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo/logo.jpg" alt="Logo NextVision" class="footer-logo">
+        <p>Sistema inteligente de inventario y atención al cliente</p>
+      </div>
+      <div>
+        <h3><i class="fas fa-map-marker-alt"></i> Contacto</h3>
+        <p>La Paz - Bolivia</p>
+        <p>+591 69160794</p>
+        <p>contacto@nextvision.com</p>
+      </div>
+      <div>
+        <h3><i class="fas fa-link"></i> Enlaces</h3>
+        <p>Términos y condiciones</p>
+        <p>Política de privacidad</p>
+        <p>Soporte técnico</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <i class="far fa-copyright"></i> 2026 NextVision. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    alert('✅ ¡Mensaje enviado correctamente! Un asesor se comunicará contigo en las próximas 24 horas.');
+    form.reset();
+  });
+
+  // Animación suave para los enlaces de redes sociales
+  document.querySelectorAll('.social-icon').forEach(icon => {
+    icon.addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('🔗 Redirigiendo a nuestra red social (Demo)');
+    });
+  });
+</script>
+
+</body>
+</html>
