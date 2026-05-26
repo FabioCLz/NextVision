@@ -4,7 +4,18 @@
   box-sizing:border-box;
   scroll-behavior:smooth;
 }
-
+  .stat-number{
+      font-size:2.5rem;
+      color:var(--primary);
+      font-weight:700;
+      margin-bottom:.5rem;
+    }
+     .stat-icon{
+      font-size:2.3rem;
+      color:var(--primary);
+      margin-bottom:0.8rem;
+      display:inline-block;
+    }
 :root{
 
   /* PALETA PREMIUM CORPORATIVA */

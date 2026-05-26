@@ -9,7 +9,8 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="/css/index.css   ">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 
@@ -68,14 +69,11 @@
         </div>
 
         <div class="hero-buttons">
+          <a href="/Html/Contacto.html" class="btn btn-primary">Solicitar demo</a>
 
-          <button class="btn btn-primary">
-            Solicitar demo
-          </button>
-
-          <button class="btn btn-secondary">
+          <a href="/Html/Sistema.html" class="btn btn-secondary">
             Ver sistema
-          </button>
+          </a>  
 
         </div>
 
@@ -101,31 +99,43 @@
 
   <section>
 
-    <div class="container stats">
+  <div class="container stats">
 
-      <div class="stat-card">
-        <h3>500+</h3>
-        <p>Clientes activos</p>
+    <div class="card">
+      <div class="stat-icon">
+        <i class="fas fa-users"></i>
       </div>
-
-      <div class="stat-card">
-        <h3>99.9%</h3>
-        <p>Tiempo de actividad</p>
-      </div>
-
-      <div class="stat-card">
-        <h3>24/7</h3>
-        <p>Soporte técnico</p>
-      </div>
-
-      <div class="stat-card">
-        <h3>98%</h3>
-        <p>Satisfacción</p>
-      </div>
-
+      <div class="stat-number">500+</div>
+      <p>Clientes activos</p>
     </div>
 
-  </section>
+    <div class="card">
+      <div class="stat-icon">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <div class="stat-number">99.9%</div>
+      <p>Tiempo de actividad</p>
+    </div>
+
+    <div class="card">
+      <div class="stat-icon">
+        <i class="fas fa-headset"></i>
+      </div>
+      <div class="stat-number">24/7</div>
+      <p>Soporte técnico</p>
+    </div>
+
+    <div class="card">
+      <div class="stat-icon">
+        <i class="fas fa-smile"></i>
+      </div>
+      <div class="stat-number">98%</div>
+      <p>Satisfacción</p>
+    </div>
+
+  </div>
+
+</section>
 
   <!-- SERVICES -->
 
@@ -258,14 +268,14 @@
         <h2>
           ¿Listo para transformar tu negocio?
         </h2>
+        <h3>
+          NextVision transforma tu negocio con tecnología para un mayor crecimiento y eficiencia. 
+        </h3>
 
-        <p>
-          Solicita una demostración gratuita y descubre todo lo que NextVision puede hacer por ti.
+        <p>   
+          Agenda una demostración gratuita y descubre todo lo que NextVision puede hacer por ti.
         </p>
 
-        <button class="btn btn-primary">
-          Solicitar demostración
-        </button>
 
       </div>
 
@@ -273,73 +283,6 @@
 
   </section>
 
-  <!-- CONTACT -->
-
-  <section id="contacto">
-
-    <div class="container">
-
-      <div class="section-title">
-
-        <h2>
-          Agenda tu demostración
-        </h2>
-
-        <p>
-          Completa tus datos y el equipo de NextVision te contactará.
-        </p>
-
-      </div>
-
-      <div class="contact-grid">
-
-        <div class="contact-card">
-
-          <form id="demoForm">
-
-            <input type="text" placeholder="Tu nombre" required>
-
-            <input type="text" placeholder="Nombre comercial">
-
-            <input type="email" placeholder="correo@empresa.com" required>
-
-            <input type="tel" placeholder="+591">
-
-            <select>
-
-              <option>
-                Selecciona una opción
-              </option>
-
-              <option>
-                Inventario
-              </option>
-
-              <option>
-                Chatbot
-              </option>
-
-              <option>
-                Reportes
-              </option>
-
-            </select>
-
-            <textarea placeholder="Cuéntanos brevemente qué buscas implementar"></textarea>
-
-            <button class="btn btn-primary" type="submit">
-              Solicitar demostración
-            </button>
-
-          </form>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
 
   <!-- FOOTER -->
 
@@ -351,7 +294,7 @@
 
         <div>
 
-          <img src="assets/logo/logo.jpg" alt="Logo NextVision" class="footer-logo">
+          <img src="/assets/logo/logo.jpg" alt="Logo NextVision" class="footer-logo">
 
           <p>
             Sistema inteligente de inventario y atención al cliente
@@ -362,26 +305,14 @@
         <div>
 
           <h3>
-            Contacto
-          </h3>
+          <i class="fas fa-map-marker-alt" style="margin-right:8px; color:var(--primary);"></i> Contacto
+        </h3>
 
           <p>La Paz - Bolivia</p>
 
           <p>+591 69160794</p>
 
           <p>contacto@nextvision.com</p>
-
-        </div>
-
-        <div>
-
-          <h3>
-            Enlaces
-          </h3>
-
-          <p>Términos y condiciones</p>
-
-          <p>Política de privacidad</p>
 
         </div>
 
